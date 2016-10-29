@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import {
     increment,
     incrementAsync
@@ -9,7 +8,6 @@ import {
 import { hashHistory } from 'react-router';
 
 class Home extends Component {
-
     render() {
         const {count, increment, incrementAsync} = this.props;
 
