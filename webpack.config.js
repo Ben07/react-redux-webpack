@@ -46,7 +46,7 @@ module.exports = {
             },
 
             {
-                test: /\.less$/,
+                test: /\.(css!less)$/,
                 loader: 'style!css!less?modules&localIdentName=[name]---[local]---[hash:base64:5]'
             },
         ]

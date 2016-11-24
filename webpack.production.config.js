@@ -61,7 +61,7 @@ module.exports = {
                     presets: ["react", "es2015"]
                 }
             }, {
-                test: /\.less$/,
+                test: /\.(css!less)$/,
                 loader: ExtractTextPlugin.extract('style', 'css!less')
             }
         ]
