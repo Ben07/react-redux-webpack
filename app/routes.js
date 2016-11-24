@@ -8,6 +8,6 @@ import About from './containers/About/About';
 export default (
 	<Route path="/" component={App}>
 		<IndexRoute component={Home} />
-		<Route path="/about" component={About} />
+		<Route path="about" component={About} />
 	</Route>
 );
