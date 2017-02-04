@@ -18,7 +18,7 @@ class Home extends Component {
                 <button onClick={incrementAsync}>incrementAsync</button>
                 <button onClick={() => hashHistory.push('/about')}>goAbout</button>
             </div>
-        )
+        );
     }
 }
 

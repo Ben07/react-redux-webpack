@@ -10,14 +10,14 @@ module.exports = {
     entry: {
         app: path.join(__dirname, 'app/index.jsx'),
         vendor: [
-            "babel-polyfill",
-            "react",
-            "react-dom",
-            "react-redux",
-            "react-router",
-            "react-router-redux",
-            "redux",
-            "redux-thunk",
+            'babel-polyfill',
+            'react',
+            'react-dom',
+            'react-redux',
+            'react-router',
+            'react-router-redux',
+            'redux',
+            'redux-thunk',
         ]
     },
     output: {
@@ -26,8 +26,16 @@ module.exports = {
         publicPath: ''
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.CommonsChunkPlugin("vendor", "vendor-[hash].min.js"),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false,
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor'
+        }),
         new HtmlWebpackPlugin({
             template: 'app/index.html',
             inject: 'body',
@@ -35,34 +43,41 @@ module.exports = {
         }),
         new ExtractTextPlugin('[name]-[hash].min.css'),
         new webpack.optimize.UglifyJsPlugin({
-            compressor: {
-                warnings: false,
-                screw_ie8: true
-            }
+            beautify: false,
+            mangle: {
+                screw_ie8: true,
+                keep_fnames: true
+            },
+            compress: {
+                screw_ie8: true,
+                warnings:false
+            },
+            comments: false
         }),
         new StatsPlugin('webpack.stats.json', {
             source: false,
             modules: false
         }),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
-        })
     ],
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ["react", "es2015"]
+                    presets: ['react', 'es2015']
                 }
             }, {
                 test: /\.(css|less)$/,
-                loader: ExtractTextPlugin.extract('style', 'css!less')
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: ['css-loader', 'less-loader'],
+                    publicPath: './dist'
+                })
             }
         ]
     }
