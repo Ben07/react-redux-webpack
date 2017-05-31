@@ -1,13 +1,16 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import App from './components/App';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+
 
 import Home from './containers/Home/Home';
 import About from './containers/About/About';
 
-export default (
-	<Route path="/" component={App}>
-		<IndexRoute component={Home} />
-		<Route path="about" component={About} />
-	</Route>
+const Routes = () => (
+	<Router>
+		<Switch>
+			<Route exact path="/" component={Home} />
+			<Route path="/about" component={About} />
+		</Switch>
+	</Router>
 );
+export default Routes;

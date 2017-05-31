@@ -1,18 +1,10 @@
-import React, { PropTypes, Component } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
+import Routes from '../routes';
 
-class App extends Component {
-    render() {
-        const {children} = this.props;
-        return (
-            <div>
-                {children}
-            </div>
-        )
-    }
-}
-
-App.propTypes = {
-    children: PropTypes.object
-};
-
+const App = ({ store }) => (
+    <Provider store={store}>
+        <Routes />
+    </Provider>
+);
 export default App;

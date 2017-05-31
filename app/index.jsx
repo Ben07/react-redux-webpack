@@ -1,26 +1,27 @@
 import 'babel-polyfill';
 import React from 'react';
-import { render } from 'react-dom';
-import { hashHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+// import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+
 import createStore from './redux/create';
-import Root from './containers/Root/Root';
+import App from './components/App';
 import './styles/app.less';
 
-const store = createStore(hashHistory);
-const history = syncHistoryWithStore(hashHistory, store);
+const store = createStore();
+const render = (Component) => {
+    ReactDOM.render(
+        <AppContainer>
+            <Component store={store} />
+        </AppContainer>,
+        document.getElementById('root')
+    );
+};
 
-render(
-    <Root store={store} history={history} />,
-    document.getElementById('root')
-);
+render(App);
 
 if (module.hot) {
-    module.hot.accept('./containers/Root/Root', () => {
-        const NewRoot = require('./containers/Root/Root').default;
-        render(
-            <NewRoot store={store} history={history} />,
-            document.getElementById('root')
-        );
+    module.hot.accept('./components/App', () => {
+        render(App);
     });
 }

@@ -11,18 +11,18 @@ module.exports = {
         app: path.join(__dirname, 'app/index.jsx'),
         vendor: [
             'babel-polyfill',
+            'prop-types',
             'react',
             'react-dom',
             'react-redux',
-            'react-router',
-            'react-router-redux',
+            'react-router-dom',
             'redux',
-            'redux-thunk',
+            'redux-thunk'
         ]
     },
     output: {
         path: path.join(__dirname, 'dist/'),
-        filename: '[name]-[hash].min.js',
+        filename: '[name]-[chunkhash].min.js',
         publicPath: ''
     },
     plugins: [
@@ -34,14 +34,14 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor'
+            names: ['vendor', 'manifest']
         }),
         new HtmlWebpackPlugin({
             template: 'app/index.html',
             inject: 'body',
             filename: 'index.html'
         }),
-        new ExtractTextPlugin('[name]-[hash].min.css'),
+        new ExtractTextPlugin('[name]-[chunkhash].min.css'),
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
             mangle: {
@@ -50,7 +50,7 @@ module.exports = {
             },
             compress: {
                 screw_ie8: true,
-                warnings:false
+                warnings: false
             },
             comments: false
         }),
@@ -74,8 +74,8 @@ module.exports = {
             }, {
                 test: /\.(css|less)$/,
                 loader: ExtractTextPlugin.extract({
-                    fallbackLoader: 'style-loader',
-                    loader: ['css-loader', 'less-loader'],
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'postcss-loader', 'less-loader'],
                     publicPath: './dist'
                 })
             }

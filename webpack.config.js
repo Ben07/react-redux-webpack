@@ -7,9 +7,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     devtool: 'eval-source-map',
     entry: [
+        'react-hot-loader/patch',
         'webpack-dev-server/client?http://localhost:8080',
         'webpack/hot/only-dev-server',
-        'react-hot-loader/patch',
         path.join(__dirname, 'app/index.jsx')
     ],
     output: {
@@ -24,6 +24,7 @@ module.exports = {
             filename: 'index.html'
         }),
         new webpack.HotModuleReplacementPlugin(),
+        // new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')
@@ -40,7 +41,7 @@ module.exports = {
                 loader: 'babel-loader',
                 query: {
                     plugins: ['react-hot-loader/babel'],
-                    presets: ['react', 'es2015']
+                    presets: ['react', ['es2015', { modules: false }]]
                 }
             },
             {
@@ -48,6 +49,7 @@ module.exports = {
                 use: [
                     'style-loader',
                     'css-loader',
+                    'postcss-loader',
                     'less-loader'
                 ]
             },

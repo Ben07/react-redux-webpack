@@ -9,18 +9,18 @@ new WebpackDevServer(webpack(config), {
     quiet: false,
     noInfo: false,
     stats: {
-      assets: false,
-      colors: true,
-      version: false,
-      hash: false,
-      timings: false,
-      chunks: false,
-      chunkModules: false
+        assets: false,
+        colors: true,
+        version: false,
+        hash: false,
+        timings: false,
+        chunks: false,
+        chunkModules: false
     }
 }).listen(8080, 'localhost', function (err) {
     if (err) {
         console.log(err);
     }
 
-  console.log('Listening at localhost:8080');
+    console.log('Listening at localhost:8080');
 });
