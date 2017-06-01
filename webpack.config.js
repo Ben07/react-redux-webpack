@@ -24,7 +24,7 @@ module.exports = {
             filename: 'index.html'
         }),
         new webpack.HotModuleReplacementPlugin(),
-        // new webpack.NamedModulesPlugin(),
+        new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')
@@ -44,15 +44,22 @@ module.exports = {
                     presets: ['react', ['es2015', { modules: false }]]
                 }
             },
-            {
-                test: /\.(css|less)$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'postcss-loader',
-                    'less-loader'
-                ]
-            },
+            // {
+            //     test: /\.(css|less)$/,
+            //     use: [
+            //         'style-loader',
+            //         {
+            //             loader: 'css-loader',
+            //             options: {
+            //                 modules: true,
+            //                 localIdentName: '[path][name]_[local]_[hash:base64:5]',
+            //                 importLoaders: 1
+            //             }
+            //         },
+            //         'postcss-loader',
+            //         'less-loader'
+            //     ]
+            // },
         ]
     }
 };

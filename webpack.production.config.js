@@ -71,14 +71,26 @@ module.exports = {
                 query: {
                     presets: ['react', 'es2015']
                 }
-            }, {
-                test: /\.(css|less)$/,
-                loader: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'postcss-loader', 'less-loader'],
-                    publicPath: './dist'
-                })
             }
+            // , {
+            //     test: /\.(css|less)$/,
+            //     loader: ExtractTextPlugin.extract({
+            //         fallback: 'style-loader',
+            //         use: [
+            //             {
+            //                 loader: 'css-loader',
+            //                 options: {
+            //                     modules: true,
+            //                     localIdentName: '[path][name]_[local]_[hash:base64:5]',
+            //                     importLoaders: 1
+            //                 }
+            //             },
+            //             'postcss-loader',
+            //             'less-loader'
+            //         ],
+            //         publicPath: './dist'
+            //     })
+            // }
         ]
     }
 };

@@ -2,26 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
+
 import {
     increment,
     incrementAsync
 } from '../../redux/modules/home';
 
-import './home.less';
+const Count = styled.h1`
+    font-size:3em;
+    display:flex;
+`;
 
 class Home extends Component {
-   
+
     render() {
-        const {count, increment, incrementAsync,history} = this.props;
+        const { count, increment, incrementAsync, history } = this.props;
 
         return (
             <div>
-                <h1 className="home-count">{count}</h1>
-                <div className="tab">
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                </div>
+                <Count>{count}</Count>
                 <button onClick={increment}>Increment</button>
                 <button onClick={incrementAsync}>incrementAsync</button>
                 <button onClick={() => history.push('/about')}>goAbout</button>

@@ -6,7 +6,7 @@ import { AppContainer } from 'react-hot-loader';
 
 import createStore from './redux/create';
 import App from './components/App';
-import './styles/app.less';
+// import './styles/app.less';
 
 const store = createStore();
 const render = (Component) => {
